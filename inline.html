@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인라인 태그</title>
+</head>
+<body>
+    <!-- 인라인, 블록 차이 -->
+    <h2><span>조태홍</span>님 환영합니다.</h2>
+    <h2><div>조태홍</div>님 환영합니다.</h2>
+    <!-- a태그, href는 속성, 경로를 찾을 때 -->
+    <a href="http://naver.com">네이버로 이동</a>
+    <!-- 속성은 한 칸을 띄우고 진행  -->
+    <!-- 타켓이 없으면 내페이지에서 이동하는거, 타켓이 있으면 blank 설정 시 새 탭으로  -->
+    <!-- a태그 안에 p태그 못 넣음  -->
+     <a href="http://naver.com" target="_blank">네이버로 이동</a>
+     <a href="http://naver.com" target="_blank">네이버로 이동</a>
+     <a href="http://naver.com" target="_blank">네이버로 이동</a>
+    <!--gnb 메뉴에서 a태그를 걸면 연결 가능 -->
+    <!--img태그, 이미지 태그, 끝태그가 없음(따로 필요한 사항이 없다), scr는 href와 같은 기능 에는 이미지 주소, -->
+    <!--이미지주소 복사 src에 넣어 주기, 이미지도 인라인 요소,-->
+    <!-- alt 안에는 이미지에 대한 설명을 넣어준다, 이미지 주소가 틀렸을 시, 설명용도로 (사진은 엑박이 뜸) -->
+     <!-- <img src="" alt=""> -->
+    <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAyMTNfNjgg%2FMDAxNzcwOTU5NjM2MTY4.nL0NFroKDFESeCpT1Lp-piEDprK65aE_cV1i-in0nbgg.z-KRrzMk-xPInJqgYlebBUiXApz08azJSc0rPnq82oYg.PNG%2FChatGPT_Image_2026%25B3%25E2_2%25BF%25F9_13%25C0%25CF_%25BF%25C0%25C8%25C4_02_11_04.png&type=sc960_832" alt="고양이 사진">
+    <!-- 이미지는 너비와 높이의 설정이 가능함 -->
+    <!-- 속성을 넣어주어서 해결 -->
+     <!-- width="500px" , 가로에맞춰 세로도 조절 -->
+     <!-- alt+z 코드가 너무 길 떄 줄 바꿈-->
+     <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAyMTNfNjgg%2FMDAxNzcwOTU5NjM2MTY4.nL0NFroKDFESeCpT1Lp-piEDprK65aE_cV1i-in0nbgg.z-KRrzMk-xPInJqgYlebBUiXApz08azJSc0rPnq82oYg.PNG%2FChatGPT_Image_2026%25B3%25E2_2%25BF%25F9_13%25C0%25CF_%25BF%25C0%25C8%25C4_02_11_04.png&type=sc960_832" alt="고양이 사진" width="500px">
+     <!-- height="500px" , 세로에맞춰 가로도 조절 -->
+     <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAyMTNfNjgg%2FMDAxNzcwOTU5NjM2MTY4.nL0NFroKDFESeCpT1Lp-piEDprK65aE_cV1i-in0nbgg.z-KRrzMk-xPInJqgYlebBUiXApz08azJSc0rPnq82oYg.PNG%2FChatGPT_Image_2026%25B3%25E2_2%25BF%25F9_13%25C0%25CF_%25BF%25C0%25C8%25C4_02_11_04.png&type=sc960_832" alt="고양이 사진" height="1000px">
+    </body>
+    <!-- 두게 합쳐서도 가능,  다만 2개를 다쓰면 이미지가 깨져서 대부분 가로만 맞춰서 사용 -->
+    <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAyMTNfNjgg%2FMDAxNzcwOTU5NjM2MTY4.nL0NFroKDFESeCpT1Lp-piEDprK65aE_cV1i-in0nbgg.z-KRrzMk-xPInJqgYlebBUiXApz08azJSc0rPnq82oYg.PNG%2FChatGPT_Image_2026%25B3%25E2_2%25BF%25F9_13%25C0%25CF_%25BF%25C0%25C8%25C4_02_11_04.png&type=sc960_832" alt="고양이 사진" height="1000px" width="500px">
+
+    <!-- input태그, 끝태그 없음, 로그인등 값 입력할 때 등 사용, 속성으로 조절 -->
+    <input type="text">
+    <!-- 비밀번호 등 가릴때, ctrl + space(로 속성찾기), password -->
+    <input type="password">
+    <input type="file">
+    <input type="datetime-local">
+    <input type="time">
+    <!-- 버튼 value로 텍스트 이동-->
+    <input type="button">
+    <input type="button" value="버튼, 제출">
+    <!-- 하단의 버튼은 중복으로 금지, 버튼 태그는 이동이 안됨, 내부에서만 바뀔 때, 새로고침 등 비슥하게 -->
+     <button><a hrdf=""></a>버튼, 제출</button>
+
+     
+    
+
+
+    </html>

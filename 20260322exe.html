@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연습2</title>
+    <link rel="stylesheet" href="/all.min.css">
+</head>
+
+<body>
+    <!-- 헤더탑 -->
+    <!-- 폰트어썸에서 불러서 넣기 -->
+    <div class="hdr-top-wrap">
+        <div class="hdr-top">
+            <i class="fa-solid fa-sleigh"></i>
+        </div>
+    </div>
+    <!-- 헤더 -->
+    <div class="hdr-wrap">
+        <header>
+            <h1>logo here</h1>
+            <ul>
+                <!--li>a (li>a)*3 >는 자식을 의미 -->
+                <!--#은 자기 자신에서 새로고침 -->
+                <li><a href="#">about</a></li>
+                <li><a href="#">news</a></li>
+                <li><a href="#">portfolio</a></li>
+            </ul>
+        </header>
+    </div>
+    <!-- 컨텐츠1 -->
+    <!-- .content-wrap.cnt-wrap$3 * 띄어쓰기 하지 않는다 *.한번더 이후 성 이름 뜨어쓰기로 이름 나눔 -->
+    <!-- .content-wrap.cnt1 -> css에서 사용 -->
+    <!-- .content-wrap>a에서 사용 -->
+    <div class="content-wrap cnt-wrap1">
+        <div class="content cnt1">
+            <!-- hdr+sect -> +는 형제관계 -->
+            <header>
+                <h2>content title</h2>
+                <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h4>
+            </header>
+            <section>
+                <div class="art-top">
+                    <article>
+                        <div class="image">이미지</div>
+                        <div class="texts">
+                            <h3>segment title</h3>
+                            <h4>Lorem ipsum dolor sit amet.</h4>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga corrupti eligendi nisi
+                                laborum suscipit error accusamus enim, veniam eos totam accusantium corporis unde soluta
+                                vel molestiae obcaecati, optio debitis est.</p>
+                            <div class="icons">
+                                <i class="fa-solid fa-thumbs-up"></i>
+                                <i class="fa-solid fa-share-nodes"></i>
+
+                            </div>
+                        </div>
+                    </article>
+                    <article>
+                        <div class="image">이미지</div>
+                        <div class="texts">
+                            <h3>segment title</h3>
+                            <h4>Lorem ipsum dolor sit amet.</h4>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga corrupti eligendi nisi
+                                laborum suscipit error accusamus enim, veniam eos totam accusantium corporis unde soluta
+                                vel molestiae obcaecati, optio debitis est.</p>
+                            <div class="icons">
+                                <i class="fa-solid fa-thumbs-up"></i>
+                                <i class="fa-solid fa-share-nodes"></i>
+                            </div>
+                    </article>
+                </div>
+                <div class="art-btm">
+                    <!-- 아티클 -> 이미지+텍스 art>img+.texts -->
+                    <article>
+                        <div class="image">이미지</div>
+                        <div class="texts">
+                            <h3>segment title</h3>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga corrupti eligendi nisi
+                                laborum suscipit error accusamus enim, veniam eos totam accusantium corporis unde soluta
+                                vel molestiae obcaecati, optio debitis est.</p>
+                            <div class="icons">
+                                <i class="fa-solid fa-thumbs-up"></i>
+                                <i class="fa-solid fa-share-nodes"></i>
+                            </div>
+                    </article>
+                    <article>
+                        <div class="image">이미지</div>
+                        <div class="texts">
+                            <h3>segment title</h3>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga corrupti eligendi nisi
+                                laborum suscipit error accusamus enim, veniam eos totam accusantium corporis unde soluta
+                                vel molestiae obcaecati, optio debitis est.</p>
+                            <div class="icons">
+                                <i class="fa-solid fa-thumbs-up"></i>
+                                <i class="fa-solid fa-share-nodes"></i>
+                            </div>
+                    </article>
+                    <article>
+                        <div class="image">이미지</div>
+                        <div class="texts">
+                            <h3>segment title</h3>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga corrupti eligendi nisi
+                                laborum suscipit error accusamus enim, veniam eos totam accusantium corporis unde soluta
+                                vel molestiae obcaecati, optio debitis est.</p>
+                            <div class="icons">
+                                <i class="fa-solid fa-thumbs-up"></i>
+                                <i class="fa-solid fa-share-nodes"></i>
+                            </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+    </div>
+    <!-- 컨텐츠2 -->
+    <div class="content-wrap cnt-wrap2">
+        <div class="content cnt2">
+            <header>
+                <h2>content title</h2>
+                <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h4>
+            </header>
+            <section>
+                <!--art  -->
+                <article>
+                    <!--.image+.texts -> 형제 관계 넣을때 -->
+                    <div class="image">이미지</div>
+                    <div class="texts">
+                        <h3>segmnet title</h3>
+                        <h4>Lorem ipsum dolor sit amet.</h4>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem, dolor consectetur
+                            aspernatur ipsa nulla, cupiditate pariatur commodi vero error saepe sapiente beatae eligendi
+                            rerum est quidem hic temporibus omnis? Voluptatem.</p>
+                        <button>button</button>
+                        <!-- 다른페이지 넘어갈때는 a태그로 진행 -->
+                    </div>
+                    <!--img 태그 전, .image div로 진행 구역을 나눠야 해서 -->
+                </article>
+            </section>
+        </div>
+    </div>
+    <!-- 컨텐츠3 -->
+    <div class="content-wrap cnt-wrap3">
+        <div class="content cnt3">
+            <header>
+                <h2>content title</h2>
+                <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h4>
+            </header>
+            <section>
+                <article>
+                    <div class="image">이미지</div>
+                    <div class="texts">
+                        <h3>segment tilte</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illum ab ducimus cum eius et eos dignissimos vero odit. Adipisci blanditiis architecto ullam rem sequi, corrupti id soluta similique alias reiciendis!</p>
+                    </div>
+                </article>
+                <article>
+                    <div class="image">이미지</div>
+                    <div class="texts">
+                        <h3>segment tilte</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illum ab ducimus cum eius et eos dignissimos vero odit. Adipisci blanditiis architecto ullam rem sequi, corrupti id soluta similique alias reiciendis!</p>
+                    </div>
+                </article>
+                <article>
+                    <div class="image">이미지</div>
+                    <div class="texts">
+                        <h3>segment tilte</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illum ab ducimus cum eius et eos dignissimos vero odit. Adipisci blanditiis architecto ullam rem sequi, corrupti id soluta similique alias reiciendis!</p>
+                    </div>
+                </article>
+                <article>
+                    <div class="image">이미지</div>
+                    <div class="texts">
+                        <h3>segment tilte</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illum ab ducimus cum eius et eos dignissimos vero odit. Adipisci blanditiis architecto ullam rem sequi, corrupti id soluta similique alias reiciendis!</p>
+                    </div>
+                </article>
+            </section>
+        </div>
+    </div>
+    <!-- 푸터 -->
+    <div class="ftr-wrap">
+        <footer>
+            <h4>logo here</h4>
+            <address>Lorem ipsum dolor sit amet consectetur adipisicing elit.</address>
+            <!-- p태그도 무관, p나 어드레스 태그 상관 없음 -->
+            <div class="icons">
+                <!-- 이미지는 인라인태그 위에서부터 순서로 진행 -->
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-facebook"></i>
+                <i class="fa-brands fa-twitter"></i>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 푸터 ctrl+ship+p > 명령에서 찾기-->
+</body>
+
+</html>
