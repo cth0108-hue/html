@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>필드셋/라벨</title>
+    <link rel="stylesheet" href="./all.min.css">
+</head>
+<body>
+    <form action="">
+        <fieldset>
+            <legend>로그인박스</legend>
+            <label for="">아이디: <input type="text"></label>
+            <!-- 두번째 방법 자식요소는 길어져서 잘 안씀 -->
+            <label for="id">아이디:</label> <input type="text" id="id"><br/>
+            <!-- 라벨 for와 input id 매칭, 아이디 칸에 포커싱 된다. 첫번쨰 방법, 짝을 잘 맞춰줘야 한다-->
+
+            <!-- 라벨에서 패스워드 라벨링하고 password와 input 바인딩 해보세요! -->
+            <label for="pass">패스워드:</label> <input type="password" id="pass" ><br/>
+            <input type="submit" value="로그인">
+            <!-- value 이름 바꾸기, <br/ 한칸 띄우기 -->
+             <!-- 라벨과 인풋의 바인딩이 중요하다 -->
+
+        </fieldset>
+        <!-- 필드셋에는 하나의 범주로 묶어주는데, 눈에 보이게 박스로 -->
+         <!-- 필드셋은 레전드랑 가팅 -->
+          <!-- 웹접근성때문에 쓴다 -->
+
+
+
+
+    </form>
+</body>
+</html>
