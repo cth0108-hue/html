@@ -1,117 +1,402 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./all.min.css">
+    <link rel="stylesheet" href="./reset.css">
+    <!-- ./reset.css 초기화-->
 
 </head>
 
 <style>
     /* 헤더탑 */
-    .hdr-top-wrap{}
-    .hdr-top-wrap>.hdr-top{}
-    .hdr-top-wrap>.hdr-top>i{}
+    .hdr-top-wrap {
+        /* 배경 */
+        background-color: #212517;
+    }
+
+    .hdr-top-wrap>.hdr-top {
+        /* CSS속성 */
+        /* 속성명: 속성값; */
+        /* 사이즈 가로:width, 세로:height */
+        /* 그리드 값은 고정되어 있음 */
+        /* 가로 최대 1080px(PC기준), 고정되어 잇어 퍼센트로 진행 */
+        /* 높이는 height(크기), line height(글자크기, 글자에만 먹힌다, 텍스트는 가운데로 간다) */
+        /* 텍스타가 잇을 떄는 line height로 준다 */
+        /* 높이는 미리 전체를 정하지 않고, 각각의 요소의 크기를 넣어서 정한다 */
+        /* 높이 값은 기존 설정된 내용에 따른다, 현재 보이는건 높이 1칸 40px */
+        width: 80%;
+        max-width: 1080px;
+        margin: 0 auto;
+        /* 가운데로 이동, 부모요소로 i로 영향 */
+        text-align: center;
+        /* bgc+색깔번호, 색깔 채우기 */
+    }
+
+
+    .hdr-top-wrap>.hdr-top>i {
+        /* 세로는 픽셀로 들어간다, 한줄이 40px 기준 ,*/
+        line-height: 40px;
+    }
 
     /* 헤더 */
-    .hdr-wrap{}
-    .hdr-wrap>header{}
-    .hdr-wrap>header>h1{}
-    .hdr-wrap>header>ul{}
-    .hdr-wrap>header>ul>li{}
+    .hdr-wrap {
+        background: #A31F30;
+    }
+
+    .hdr-wrap>header {
+    /* 헤더탑과 동일 */
+    /* 컨텐츠  푸터만 동일하게 */
+        width: 80%;
+        max-width: 1080px;
+        margin: 0 auto;
+        line-height: 80px;
+        /* flex 사용, 옆으로 옮길 수 있게 끔 해준다 */
+        display: flex;
+        /* justify 화면 구성, spacd between은 양 옆으로 나뉜다 */
+        justify-content: space-between;
+
+    }
+
+    .hdr-wrap>header>h1 {
+        /* 글자가 있을 시 높이 크기는 line height로, 2개로 나눠져 있어 80px */
+        /* 만약 부모가 영향을 받으면 자식도 받음 헤더에 줘도 된다 -> line-height: 80px; -*/
+        /* ** 가로 사이즈 넣기 */
+        /* 가로사이즈에 맞게 넣는다!!, 연산자와 숫자사이는 반드시 한 칸 띄원다 */
+        /* 12칸 중 1칸을 차지(궈터? 포함) */
+        /* cal은 계산을 한다, 직관적으로 써주는게 좋다, 100%를 12개로 나눈것 중 하나 */
+        width: calc(100% / 12 * 1);
+    }
+
+    .hdr-wrap>header>ul {
+        /* 우선 처은 gnb 전체에 가로사이즈를 넣어줘야한다 */
+        /* 2칸 차지 */
+        width: calc(100% / 12 * 2);
+        /* 옆으로 붙여준다 */
+        display: flex;
+        column-gap: 20px;
+    }
+
+    .hdr-wrap>header>ul>li {}
+
+
 
     /* 컨텐츠 공통 */
-    .content-wrap{}
-    .content-wrap>.content{}
-    .content-wrap>.content>header{}
-    .content-wrap>.content>header>h2{}
-    .content-wrap>.content>header>h4{}
+    .content-wrap {
+        /* 마진의 바텀은 없다, 위를 기준으로 떨어진다 */
+        /* 컨텐츠 기준 2칸씩 떨어져있음,  */
+        margin-top: 80px;
+    }
+
+    .content-wrap>.content {
+
+        width: 80%;
+        max-width: 1080px;
+        margin: 0 auto;
+    }
+
+    /* 동일적용 */
+
+    .content-wrap>.content>header {}
+
+    .content-wrap>.content>header>h2 {
+        /* lh80px  */
+        /* 1칸 40px * 2칸 적용 */
+        line-height: 80px;  
+        /* 크기 조정 없이 중앙으로만 하면 됨, 중앙으로 보내는 요소 */
+        text-align: center;
+
+    }
+
+    .content-wrap>.content>header>h4 {
+        /* 2줄로 진행 박스가 정해져 있음, 높이를 맞춰야한다 */
+        /* h40px + tab */
+        /* 한줄에 2줄로 line height는 20px */
+        height: 40px;
+        line-height: 20px;
+        /* 크기지정 */
+        width: calc(100% / 12 * 6);
+        text-align: center;
+        /*가운데로 옮긴다,  */
+        margin: 0 auto;
+
+        /* 넘치는건 숨긴다 */
+        overflow: hidden;
+
+    }
+
+    .content-wrap>.content>section {
+        /* 섹션에서 헤더와 떨어뜨릴때 */
+        margin-top: 40px;
+    }
+
+    .content-wrap>.content>section>article {}
+
+    .content-wrap>.content>section article>.image {
+        /* 이미지는 세로 8칸으로 40px(1칸)*8칸=320px */
+        /* 지금은 컨텐츠 전부 320px, 사이즈 다른 건 각각 아래에서 적용 */
+        /* 기존 섹션>아티클 이었으나, 모두 적용위에 한칸 띄우는(하위요소) 걸로 변경  */
+        height: 320px;
+        background-color: #ccc;
+    }
+
+    .content-wrap>.content>section>article>.texts {}
+
+    .content-wrap>.content>section article>.texts>h3 {
+        /* segment tilte 1칸 */
+        /* 1번 segement title 안먹음, 위 아래로 쪼개서  */
+         /* 기존 섹션>아티클 이었으나, 모두 적용위에 한칸 띄우는(하위요소) 걸로 변경  */
+        line-height: 40px;
+    }
+
+    .content-wrap>.content>section article>.texts>h4 {
+         /*h4 1칸 */
+        /* 1번 segement title 안먹음, 위 아래로 쪼개서  */
+         /* 기존 섹션(section)>아티클(article) 이었으나, 모두 적용위에 한칸 띄우는(하위요소) 걸로 변경  */       
+        line-height: 40px;
+        /* 한번에 6칸으로 6칸으로 지정 */
+        width: calc(100% / 12 * 6);
+        /* 하단 가운데 정렬의 경우 텍스트박스 안에서 가운데 정렬, 이경우 마진과 오토를 추가로줘야한다 */
+        text-align: center;
+
+    }
+
+    .content-wrap>.content>section article>.texts>p {
+        /* 1칸에 2줄로 진행, 높이는 다 다를 수 있으나 전부 1칸에 2줄로 진행 */
+        /* 크기는 나중에 밑에서 진행해 준다 */
+        /* 80px는 대부분의 크기로 우선 조정 */
+         /* 기존 섹션(section)>아티클(article) 이었으나, 모두 적용위에 한칸 띄우는(하위요소) 걸로 변경  */    
+        height: 80px;
+        line-height: 20px;
+    }
+
+    .content-wrap>.content>section>article>.texts>.icons {}
+
+    .content-wrap>.content>section>article>.texts>.icons>i {}
 
 
 
-    .content-wrap>.content>section{}
-    .content-wrap>.content>section>article{}
-    .content-wrap>.content>section>article>.image{}
-    .content-wrap>.content>section>article>.texts{}
-    .content-wrap>.content>section>article>.texts>h3{}
-    .content-wrap>.content>section>article>.texts>h4{}
-    .content-wrap>.content>section>article>.texts>p{}
-    .content-wrap>.content>section>article>.texts>.icons{}
-    .content-wrap>.content>section>article>.texts>.icons>i{}
-
-
-    
 
     /* 컨텐츠1 */
-    .content-wrap.cnt-wrap1{}
-    .content-wrap.cnt-wrap1>.content.cnt1{}
-    .content-wrap.cnt-wrap1>.content.cnt1>header{}
-    .content-wrap.cnt-wrap1>.content.cnt1>header>h2{}
-    .content-wrap.cnt-wrap1>.content.cnt1>header>h4{}
+    .content-wrap.cnt-wrap1 {}
+
+    .content-wrap.cnt-wrap1>.content.cnt1 {}
+
+    .content-wrap.cnt-wrap1>.content.cnt1>header {}
+
+    .content-wrap.cnt-wrap1>.content.cnt1>header>h2 {}
+
+    .content-wrap.cnt-wrap1>.content.cnt1>header>h4 {}
 
 
-    .content-wrap.cnt-wrap1>.content.cnt1>section{}
-    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-top{}
-    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-top>article{}
-    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-top>article>.image{}
-    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-top>article>.texts{}
-    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-top>article>.texts>h3{}
-    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-top>article>.texts>h4{}
-    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-top>article>.texts>p{}
-    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-top>article>.texts>.icons{}
-    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-top>article>.texts>.icons>i{}
+    .content-wrap.cnt-wrap1>.content.cnt1>section {}
+
+    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-top {
+        /* 두개로 붙일때 */
+        /* 아티클에 붙이면 그림과 글이 붙는다 */
+        display: flex;
+        /*  */
+        /* justify-content: space-between; */
+         /* display flex 있을때만, 컬럼에서 나누고 차이가 20px */
+        column-gap: 20px;
+    }
+
+    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-top>article {
+        /* 이미지, 하단 텍스트 크기에 모두 영향 */
+        /* 반에서 궈터를 뺀 금액 */
+        width: calc(50%-10px)
+    }
+
+    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-top>article>.image {
+        /* 50%-10px ,  */
+        /* width: calc(50%-10px); -> 계산용, 여기에 주지 말고 위에 아티클에 준다*/ 
+    }
+
+    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-top>article>.texts {}
+
+    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-top>article>.texts>h3 {}
+
+    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-top>article>.texts>h4 {}
+
+    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-top>article>.texts>p {}
+
+    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-top>article>.texts>.icons {
+        /* 아직 공통이 없어 각각 확인 */
+        /* 아이콘은 폰트로 본다 */
+        /* 1칸을 차지하고 크기가 1칸 사이즈에 꽉차는 사이즈로 진행 */
+        line-height: 40px;
+    }
+
+    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-top>article>.texts>.icons>i {}
 
 
-    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-btm{}
-    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-btm>article{}
-    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-btm>article>.image{}
-    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-btm>article>.texts{}
-    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-btm>article>.texts>h3{}
-    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-btm>article>.texts>p{}
-    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-btm>article>.texts>.icons{}
-    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-btm>article>.texts>.icons>i{}
+    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-btm {
+        /* 두개로 붙일때 */
+        /* 아티클에 붙이면 그림과 글이 붙는다 */
+        display: flex;
+
+    }
+
+    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-btm>article {
+        /* 1/3dp 나머지칸 10px  */
+        /* width: calc(100% / 3 - 10px) -> 계산용; */
+         width: calc(100% / 3 - 10px)
+    }
+
+    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-btm>article>.image {}
+
+    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-btm>article>.texts {}
+
+    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-btm>article>.texts>h3 {}
+
+    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-btm>article>.texts>p {}
+
+    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-btm>article>.texts>.icons {
+        /* 아직 공통이 없어 각각 확인 */
+        /* 아이콘은 폰트로 본다 */
+        /* 1칸을 차지하고 크기가 1칸 사이즈에 꽉차는 사이즈로 진행 */
+        line-height: 40px;
+    }
+
+    .content-wrap.cnt-wrap1>.content.cnt1>section>.art-btm>article>.texts>.icons>i {}
 
     /* 컨텐츠2 */
-    .content-wrap.cnt-wrap2{}
-    .content-wrap.cnt-wrap2>.content.cnt2{}
-    .content-wrap.cnt-wrap2>.content.cnt2>header{}
-    .content-wrap.cnt-wrap2>.content.cnt2>header>h2{}
-    .content-wrap.cnt-wrap2>.content.cnt2>header>h4{}
+    .content-wrap.cnt-wrap2 {}
 
-    .content-wrap.cnt-wrap2>.content.cnt2>section{}
-    .content-wrap.cnt-wrap2>.content.cnt2>section>article{}
-    .content-wrap.cnt-wrap2>.content.cnt2>section>article>.image{}
-    .content-wrap.cnt-wrap2>.content.cnt2>section>article>.texts{}
-    .content-wrap.cnt-wrap2>.content.cnt2>section>article>.texts>h3{}
-    .content-wrap.cnt-wrap2>.content.cnt2>section>article>.texts>h4{}
-    .content-wrap.cnt-wrap2>.content.cnt2>section>article>.texts>p{}
-    .content-wrap.cnt-wrap2>.content.cnt2>section>article>.texts>button{}
+    .content-wrap.cnt-wrap2>.content.cnt2 {}
+
+    .content-wrap.cnt-wrap2>.content.cnt2>header {
+         background-color: #f00;
+         /* 위를 패딩입은거 처럼 더 불려준다 */
+         /* 내 기준으로 얼마만큼 불려야 할 것인가 했을 때 써준다 */
+         padding-top: 80px;
+         padding-bottom: 300px;
+    }
+
+    .content-wrap.cnt-wrap2>.content.cnt2>header>h2 {}
+
+    .content-wrap.cnt-wrap2>.content.cnt2>header>h4 {}
+
+    .content-wrap.cnt-wrap2>.content.cnt2>section {}
+
+    .content-wrap.cnt-wrap2>.content.cnt2>section>article {
+        /* 아티클에서 크기를 반으로 줄이게 되면 전체가 줄음 */
+        /* 섹션에서는 줄게 없고 아티클안에서 이미지와 텍스트가 위아래로 있어 옆으로 붙인다 */
+        display: flex;
+        /* display flex 있을때만, 컬럼에서 나누고 차이가 20px */
+        column-gap: 20px;
+    }
+
+    .content-wrap.cnt-wrap2>.content.cnt2>section>article>.image {
+        /* 이미지 크기가 공통과 다름 */
+        /* 11칸 */
+        /* 가로이미지는 50%이므로 */
+        height: 440px;
+        width: 50%;
+    }
+
+    .content-wrap.cnt-wrap2>.content.cnt2>section>article>.texts {
+        /* 텍스트는 그림의 반이므로, 그리고 이건 하단 버튼에도 영향 */
+        width: 50%;
+    }
+
+    .content-wrap.cnt-wrap2>.content.cnt2>section>article>.texts>h3 {}
+
+    .content-wrap.cnt-wrap2>.content.cnt2>section>article>.texts>h4 {}
+
+    .content-wrap.cnt-wrap2>.content.cnt2>section>article>.texts>p {
+        /* 공통요소에서 얘만 크기가 다르므로 크기 다시 설정 */
+        height: 120px;
+    }
+
+    .content-wrap.cnt-wrap2>.content.cnt2>section>article>.texts>button {
+        /* button 이라는 글씨라는 크기와 가운데로 보내기 위해 line height를 쓴다 */
+        line-height: 40px;
+        /* 버튼은 텍스트가 이미 반으로 되어 있어서 이거에 반 이므로*/
+        /* 위에 텍스트위 반값으로 주면된다 */
+        width: calc(100% / 6 * 4);
+    }
 
     /* 컨텐츠3 */
-    .content-wrap.cnt-wrap3{}
-    .content-wrap.cnt-wrap3>.content.cnt3{}
-    .content-wrap.cnt-wrap3>.content.cnt3>header{}
-    .content-wrap.cnt-wrap3>.content.cnt3>header>h2{}
-    .content-wrap.cnt-wrap3>.content.cnt3>header>h4{}
+    .content-wrap.cnt-wrap3 {}
+
+    .content-wrap.cnt-wrap3>.content.cnt3 {}
+
+    .content-wrap.cnt-wrap3>.content.cnt3>header {}
+
+    .content-wrap.cnt-wrap3>.content.cnt3>header>h2 {}
+
+    .content-wrap.cnt-wrap3>.content.cnt3>header>h4 {}
 
 
-    .content-wrap.cnt-wrap3>.content.cnt3>section{}
-    .content-wrap.cnt-wrap3>.content.cnt3>section>article{}
-    .content-wrap.cnt-wrap3>.content.cnt3>section>article>.image{}
-    .content-wrap.cnt-wrap3>.content.cnt3>section>article>.texts{}
-    .content-wrap.cnt-wrap3>.content.cnt3>section>article>.texts>h3{}
-    .content-wrap.cnt-wrap3>.content.cnt3>section>article>.texts>h4{}
+    .content-wrap.cnt-wrap3>.content.cnt3>section {
+        /* 아티클이 아닌 섹션에서 */
+        /* 아티클에서 주면 그림과 글이 붙는다 */
+        display: flex;
+         /* display flex 있을때만, 컬럼에서 나누고 차이가 20px */
+        column-gap: 20px;
+    }
+
+    .content-wrap.cnt-wrap3>.content.cnt3>section>article {
+        /* 4개로 나눈후에 궈터 부분 빼기 */
+        width: cal(100% / 4 - 10px);
+    }
+
+    .content-wrap.cnt-wrap3>.content.cnt3>section>article>.image {
+        /* 높이가 5칸으로 공통과 다를 경우 진행 */
+        height: 200px;
+        
+    }
+
+    .content-wrap.cnt-wrap3>.content.cnt3>section>article>.texts {}
+
+    .content-wrap.cnt-wrap3>.content.cnt3>section>article>.texts>h3 {}
+
+    .content-wrap.cnt-wrap3>.content.cnt3>section>article>.texts>p {}
 
     /* 푸터 */
-    .ftr-wrap{}
-    .ftr-wrap>footer{}
-    .ftr-wrap>footer>h4{}
-    .ftr-wrap>footer>address{}
-    .ftr-wrap>footer>.icons{}
-    .ftr-wrap>footer>.icons>i{}
+    .ftr-wrap {
+        /* 마진의 바텀은 없다, 위를 기준으로 떨어진다 */
+        /* 컨텐츠 기준 2칸씩 떨어져있음,  */
+        margin-top: 80px;
+        background-color: #A31F30;
+    }
+
+    .ftr-wrap>footer {
+    /* 공식 : 그리드(컨텐츠 내용) 사이즈 */
+        width: 80%;
+        max-width: 1080px;
+        margin: 0 auto;
+    }
 
 
+
+
+    .ftr-wrap>footer>h4 {
+        /* 글자 + 가운데 크기 조정, 2칸  */
+        /* 세로 2칸 중 가운데 */
+        line-height: 80px;
+    }
+
+    .ftr-wrap>footer>address {
+        /* 1 우선 크기는 한칸이고 그중에 line height는 20px(반)으로 진행 */
+        /* 텍스트 박스에서 높이(height)가 필요한 이유는 그 크기만큼 보여서
+        만약 그 크기만으로 보여주려면  높이(height) 로 진행 그리고 추가로 line height로 글씨크기 확인*/
+        height: 40px;
+        line-height: 20px;
+    }
+
+    .ftr-wrap>footer>.icons {
+        /* 아이콘은 폰트로 본다, 높이는 40으로 보나, 가로는 정해져 있음 */
+        /* 세로 2칸 중 가운데로 본다 (꽉차보여도..) */
+           /* 인라인 요소라 flex를 써주지 않느다 */
+        line-height: 80px;
+    }
+
+    .ftr-wrap>footer>.icons>i {}
 </style>
 
 <body>
@@ -139,7 +424,7 @@
         <div class="content cnt1">
             <header>
                 <h2>content title</h2>
-                <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, aliquid?</h4>
+                <h4>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore, aperiam? Accusamus porro, corporis molestias iste officia earum dolores velit atque nihil cum sequi id excepturi saepe tempora ut, nisi assumenda.</h4>
             </header>
             <section>
                 <div class="art-top">
@@ -147,7 +432,7 @@
                         <div class="image">이미지</div>
                         <div class="texts">
                             <h3>segment title</h3>
-                            <h4>Lorem ipsum dolor sit amet.</h4>
+                            <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab quae velit consequatur dolore quod voluptas ducimus optio exercitationem debitis rem deserunt, harum officiis, illo perspiciatis? Laborum ad nihil suscipit dignissimos!</h4>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse, saepe?</p>
                             <div class="icons">
                                 <i class="fa-solid fa-thumbs-up"></i>
@@ -209,7 +494,7 @@
 
     <!-- 컨텐츠2 -->
     <div class="content-wrap cnt-wrap2">
-        <div class="content cnt2">]
+        <div class="content cnt2">
             <header>
                 <h2>content title</h2>
                 <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, aliquid?</h4>
@@ -230,7 +515,7 @@
 
     <!-- 컨텐츠3 -->
     <div class="content-wrap cnt-wrap3">
-        <div class="content cnt3">]
+        <div class="content cnt3">
             <header>
                 <h2>content title</h2>
                 <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, aliquid?</h4>
@@ -281,4 +566,5 @@
         </footer>
     </div>
 </body>
+
 </html>
