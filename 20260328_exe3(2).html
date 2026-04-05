@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="./css/all.min.css">
     <link rel="stylesheet" href="./reset.css">
     <style>
+
+
         /* 헤더탑 */
         .hdr-top-wrap {
             /* CSS 속성 */
@@ -21,6 +23,13 @@
             margin: 0 auto;
             text-align: center;
             /* 속성명 : 속성값; */
+
+            /* 헤더탑이미지 */
+            background-image: url('./image/css/헤더탑_이미지.png');
+            /* 크기가 1/3 사이즈 */
+            background-size: 33.3% 100%;
+            /* 세로값은 100%로 확인 */
+            background-repeat: repeat-x;
         }
 
         .hdr-top-wrap>.hdr-top>i {
@@ -515,6 +524,32 @@
             text-align: center;
             font-size: 45px;
         }
+        /* 스타일 마지막에써준다 */
+        /* 반응형 만들기 - 태블릿*/
+        @media (max-width: 1024px) {
+
+            /* 하단은 크기가 달라졌을 때 위 헤더탑 색깔이 바뀜 */
+            /* .hdr-top-wrap{
+                background-color: #fc0;
+            } */
+            /* 개발자 모두에서 가져와서 진행 */
+               .content-wrap.content1>.content.cnt1>section>.art-top>article:nth-of-type(2)
+               {
+                display: none;
+               }
+               .content-wrap.content1>.content.cnt1>section>.art-top>article {
+                width: 100%;
+                }
+
+
+        }
+        /* 반응형 만들기 - 휴대폰*/
+        @media (max-width: 420px) {
+            .hdr-top-wrap{
+                background-color: rgb(15,220,145);
+            }
+        }
+        
     </style>
     <title>20260328_exe3</title>
 </head>
