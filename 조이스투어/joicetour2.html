@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./css/all.min.css">
+  <link rel="stylesheet" href="./reset.css">
+  <title>조이스투어</title>
+
+  <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://unpkg.com/gsap@3/dist/Observer.min.js"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+      overflow: hidden;
+      font-family: sans-serif;
+    }
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      align-items: center;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.92);
+      overflow: visible;
+      backdrop-filter: blur(8px);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: max-content;
+      min-width: max-content;
+      flex-shrink: 0;
+      overflow: visible;
+    }
+
+    .logo img {
+      display: block;
+      height: 80px;
+      width: auto;
+      max-width: none;
+      object-fit: contain;
+      flex-shrink: 0;
+      background-image: url(./image/조이스투어\ 로고\(투명\).png);
+    }
+
+    .logo-text {
+      font-size: 15px;
+      letter-spacing: 0.5px;
+      color: #677AAB;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .header nav {
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      min-width: 0;
+    }
+
+    .header nav a {
+      margin-left: 0;
+      color: #677AAB;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .viewport {
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      height: 100%;
+      will-change: transform;
+    }
+
+    section {
+      height: 100vh;
+      padding-top: 80px;
+      position: relative;
+    }
+
+    .joice-hero {
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 24px;
+      color: #ffffff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.28);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      width: 100%;
+      max-width: 980px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding-left: 0;
+    }
+
+    .hero-content h1 {
+      font-size: 50px;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .hero-content p {
+      font-size: 18px;
+      margin-bottom: 0;
+      line-height: 1.65;
+    }
+
+    .hero-btn {
+      display: none;
+    }
+
+    .joice-cards {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 20px;
+      transform: translateY(-120px);
+      position: relative;
+      z-index: 2;
+      padding: 0 20px;
+      max-width: 1600px;
+      margin: 0 auto;
+      align-items: stretch;
+    }
+
+    .card {
+      background-color: #fff;
+      padding: 20px;
+      width: 100%;
+      min-width: 0;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      border: 1px solid #D9D9D9;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 22px;
+      line-height: 1.3;
+    }
+
+    .card p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #334155;
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    @media (max-width: 1280px) {
+      .joice-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        max-width: 900px;
+      }
+    }
+
+    .page2 {
+      background: #3498db;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .page3 {
+      background: #9b59b6;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .indicator {
+      position: fixed;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 1001;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .dot.active {
+      background: white;
+      transform: scale(1.4);
+    }
+
+    .service-section {
+      background: #0f172a;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .service-inner {
+      width: 100%;
+      max-width: 1200px;
+      padding: 0 40px;
+    }
+
+    .service-title {
+      font-size: 42px;
+      line-height: 1.3;
+      margin-bottom: 60px;
+    }
+
+    .service-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .service-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 40px 30px;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .service-icon {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    .service-card h3 {
+      font-size: 22px;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .service-card p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    @media (max-width: 900px) {
+      .service-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .service-title {
+        font-size: 32px;
+        margin-bottom: 40px;
+      }
+    }
+
+    .inquiry-section {
+      background: #f8fafc;
+      color: #0f172a;
+      padding-top: 120px;
+    }
+
+    .inquiry-wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 32px;
+      height: calc(100vh - 120px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .inquiry-header {
+      margin-bottom: 24px;
+    }
+
+    .inquiry-header h2 {
+      font-size: 30px;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .inquiry-header p {
+      color: #475569;
+      font-size: 20px;
+      line-height: 1.6;
+    }
+
+    .inquiry-form {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      flex: 1;
+      overflow-y: auto;
+      max-width: 1000px;
+      margin: 0 auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+      touch-action: pan-y;
+    }
+
+    @media (min-width: 1024px) {
+      .inquiry-form {
+        min-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .inquiry-form input,
+    .inquiry-form select,
+    .inquiry-form textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 8px;
+      border: 1px solid #cbd5f5;
+      font-size: 14px;
+    }
+
+    .inquiry-form textarea {
+      margin-bottom: 16px;
+      resize: vertical;
+    }
+
+    .consent {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .inquiry-form button {
+      width: 100%;
+      padding: 14px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .inquiry-footer {
+      margin-top: 20px;
+      padding: 20px 0 20px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .footer-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 32px;
+      font-size: 13px;
+      color: #6b7280;
+      line-height: 1.6;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      line-height: 1;
+    }
+
+    .logo-crop {
+      width: 100px;
+      height: 40px;
+      overflow: hidden;
+      display: block;
+    }
+
+    .logo-crop img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .brand-text {
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .footer-info p {
+      margin: 2px 0;
+    }
+
+    .footer-note {
+      margin-top: 8px;
+      color: #9ca3af;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+      html,
+      body {
+        overflow: hidden;
+      }
+
+      .header {
+        height: 64px;
+        padding: 0 16px;
+      }
+
+      .logo {
+        gap: 8px;
+      }
+
+      .logo img {
+        height: 52px;
+      }
+
+      .logo-text {
+        font-size: 12px;
+        line-height: 1.2;
+        white-space: normal;
+        word-break: keep-all;
+      }
+
+      .header nav {
+        gap: 10px;
+      }
+
+      .header nav a {
+        margin-left: 0;
+        font-size: 12px;
+      }
+
+      .viewport {
+        height: 100dvh;
+      }
+
+      .container {
+        height: auto;
+      }
+
+      section {
+        padding-top: 64px;
+      }
+
+      .page1 {
+        height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+      }
+
+      .joice-hero {
+        height: 48dvh;
+        min-height: 320px;
+        padding: 0 16px;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .hero-content {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+        align-items: center;
+        text-align: center;
+      }
+
+      .hero-content h1 {
+        font-size: 28px;
+        line-height: 1.2;
+        margin-bottom: 12px;
+      }
+
+      .hero-content p {
+        font-size: 14px;
+        line-height: 1.55;
+        margin-bottom: 0;
+        word-break: keep-all;
+      }
+
+      .joice-cards {
+        display: flex !important;
+        gap: 12px;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        padding-top: 0;
+        padding-bottom: 16px;
+        padding-left: calc((100vw - 82vw) / 2);
+        padding-right: calc((100vw - 82vw) / 2);
+        transform: translateY(-36px);
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        scroll-padding-left: calc((100vw - 82vw) / 2);
+        scroll-padding-right: calc((100vw - 82vw) / 2);
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .joice-cards::-webkit-scrollbar {
+        display: none;
+      }
+
+      .card {
+        flex: 0 0 82vw;
+        width: 82vw;
+        min-width: 82vw;
+        max-width: 82vw;
+        padding: 16px;
+        margin: 0;
+        scroll-snap-align: center;
+      }
+
+      .card h3 {
+        font-size: 18px;
+        margin-bottom: 8px;
+      }
+
+      .card p {
+        font-size: 13px;
+        line-height: 1.5;
+      }
+
+      .card img {
+        height: 160px;
+        margin-bottom: 10px;
+      }
+
+      .indicator {
+        right: 10px;
+        gap: 10px;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+      }
+
+      .page2.service-section {
+        height: auto !important;
+        min-height: 0 !important;
+        padding-top: 64px;
+        padding-bottom: 20px;
+        align-items: flex-start;
+      }
+
+      .service-inner {
+        padding: 16px 16px 20px;
+      }
+
+      .service-title {
+        font-size: 26px;
+        line-height: 1.35;
+        margin-bottom: 16px;
+      }
+
+      .service-cards {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 12px;
+        overflow: visible !important;
+        padding-bottom: 0;
+        scroll-snap-type: none;
+      }
+
+      .service-card {
+        min-width: 0 !important;
+        width: 100%;
+        padding: 18px 16px;
+      }
+
+      .service-icon {
+        font-size: 26px;
+        margin-bottom: 12px;
+      }
+
+      .service-card h3 {
+        font-size: 18px;
+        margin-bottom: 8px;
+      }
+
+      .service-card p {
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      .page3.inquiry-section {
+        height: 100dvh;
+      }
+
+      .inquiry-section {
+        padding-top: 84px;
+      }
+
+      .inquiry-wrapper {
+        height: calc(100dvh - 84px);
+        padding: 0 16px;
+      }
+
+      .inquiry-header {
+        margin-bottom: 16px;
+      }
+
+      .inquiry-header h2 {
+        font-size: 24px;
+        margin-bottom: 6px;
+      }
+
+      .inquiry-header p {
+        font-size: 15px;
+        line-height: 1.5;
+      }
+
+      .inquiry-form {
+        width: 100%;
+        min-width: 0 !important;
+        max-width: none;
+        padding: 16px;
+        border-radius: 12px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .inquiry-form input,
+      .inquiry-form select,
+      .inquiry-form textarea {
+        font-size: 14px;
+      }
+
+      .consent {
+        align-items: flex-start;
+        margin-bottom: 16px;
+      }
+
+      .inquiry-form button {
+        font-size: 15px;
+        padding: 13px;
+      }
+
+      .inquiry-footer {
+        margin-top: 16px;
+        padding-top: 16px;
+      }
+
+      .footer-container {
+        padding: 0 16px;
+        font-size: 11px;
+        line-height: 1.6;
+      }
+
+      .footer-brand {
+        flex-wrap: wrap;
+        row-gap: 6px;
+      }
+
+      .logo-crop {
+        width: 84px;
+        height: 32px;
+      }
+
+      .brand-text {
+        font-size: 12px;
+      }
+
+      .footer-note {
+        font-size: 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header {
+        padding: 0 12px;
+      }
+
+      .logo-text {
+        display: none;
+      }
+
+      .header nav {
+        gap: 8px;
+      }
+
+      .header nav a {
+        font-size: 11px;
+      }
+
+      .hero-content h1 {
+        font-size: 24px;
+      }
+
+      .hero-content p {
+        font-size: 13px;
+      }
+
+      .joice-cards {
+        gap: 10px;
+        padding-left: calc((100vw - 86vw) / 2);
+        padding-right: calc((100vw - 86vw) / 2);
+        scroll-padding-left: calc((100vw - 86vw) / 2);
+        scroll-padding-right: calc((100vw - 86vw) / 2);
+      }
+
+      .card {
+        flex-basis: 86vw;
+        width: 86vw;
+        min-width: 86vw;
+        max-width: 86vw;
+      }
+
+      .indicator {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="header">
+    <div class="logo">
+      <img src="./image/조이스투어 로고(투명).png" alt="JoiceTour Logo" />
+      <span class="logo-text">여행의 좋은선택 조이스투어</span>
+    </div>
+
+    <nav>
+      <a data-index="0">회사소개</a>
+      <a data-index="1">서비스</a>
+      <a data-index="2">견적문의</a>
+    </nav>
+  </header>
+
+  <div class="viewport">
+    <div class="container">
+
+      <section class="page1">
+        <div class="joice-hero">
+          <video class="hero-video" autoplay muted loop playsinline>
+            <source src="./image/공항대기 메인1.mp4" type="video/mp4" />
+          </video>
+
+          <div class="hero-overlay"></div>
+
+          <div class="hero-content">
+            <h1>조이스투어(JOICETOUR)</h1>
+            <p>
+              조이스투어는 기업 고객을 위한 전문 여행/행사 기획을 진행하는 여행사입니다.<br />
+              출장관리, 비용최적화, 온·오프라인 전담서비스를 제공합니다.<br />
+              문의) Tel.010-6300-9670 / E-mail. joicetour.naver.com
+            </p>
+          </div>
+        </div>
+
+        <div class="joice-cards">
+          <div class="card">
+            <h3>기업 출장</h3>
+            <img src="./image/출장 사진 1.jpg" alt="메인1 기업 출장" />
+            <p>원스톱 예약, 출장관리 솔루션</p>
+          </div>
+
+          <div class="card">
+            <h3>인센티브/MICE</h3>
+            <img src="./image/컨벤션.jpg" alt="메인2 인센티브/마이스" />
+            <p>기업행사 기획, 프로그램 구성, 현장 운영</p>
+          </div>
+
+          <div class="card">
+            <h3>임직원 복지 / 기타서비스</h3>
+            <img src="./image/복지사진.jpg" alt="메인3 임직원 복지/기타서비스" />
+            <p>복지몰 상품 제공, 제휴서비스 추가혜택</p>
+          </div>
+
+          <div class="card">
+            <h3>워크숍 / 단체행사</h3>
+            <img src="./image/워크숍.jpg" alt="메인4 워크숍/단체행사" />
+            <p>기업 워크숍, 단체행사, 맞춤 일정 운영</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="page2 service-section">
+        <div class="service-inner">
+          <h2 class="service-title">
+            기업 고객을 위한 통합 출장 & 행사 솔루션
+          </h2>
+
+          <div class="service-cards">
+            <div class="service-card">
+              <div class="service-icon">✈️</div>
+              <h3>기업 출장관리</h3>
+              <p>
+                항공 · 숙박 · 교통을 하나로<br />
+                원스톱 예약 및 출장관리 솔루션
+              </p>
+            </div>
+
+            <div class="service-card">
+              <div class="service-icon">🎤</div>
+              <h3>MICE / 인센티브</h3>
+              <p>
+                국내외 기업행사 기획부터<br />
+                프로그램 구성 및 현장 운영까지
+              </p>
+            </div>
+
+            <div class="service-card">
+              <div class="service-icon">🔗</div>
+              <h3>출장시스템 연동</h3>
+              <p>
+                기업 내부 시스템과<br />
+                연동되는 맞춤형 출장 솔루션
+              </p>
+            </div>
+
+            <div class="service-card">
+              <div class="service-icon">☎️</div>
+              <h3>기업전용 상담창구 지원</h3>
+              <p>
+                기업고객 전용 상담창구 지원을 통한<br />
+                임직원 맞춤형 일정관리
+              </p>
+            </div>
+
+            <div class="service-card">
+              <div class="service-icon">😎</div>
+              <h3>임직원 복지서비스</h3>
+              <p>
+                전용 복지몰을 통한 국내외 특가 상품 및 <br />
+                여행상품 특별 우대혜택 제공
+              </p>
+            </div>
+
+            <div class="service-card">
+              <div class="service-icon">👍</div>
+              <h3>제휴서비스 지원</h3>
+              <p>
+                면세점, 골프, 호텔 등 <br />
+                연동되는 맞춤형 제휴서비스 지원
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page3 inquiry-section">
+        <div class="inquiry-wrapper">
+
+          <div class="inquiry-header">
+            <h2>견적 문의</h2>
+            <p>
+              기업 출장 · 행사 · 시스템 연동 관련 문의를 남겨주세요.<br />
+              담당자가 빠르게 연락드리겠습니다.
+            </p>
+          </div>
+
+          <form class="inquiry-form">
+            <div class="form-row">
+              <input type="text" placeholder="회사명 *" required />
+              <input type="text" placeholder="담당자명 *" required />
+            </div>
+
+            <div class="form-row">
+              <input type="email" placeholder="이메일 주소 *" required />
+              <input type="tel" placeholder="전화번호 *" required />
+            </div>
+
+            <div class="form-row">
+              <select required>
+                <option value="">문의 서비스 *</option>
+                <option>기업 출장관리</option>
+                <option>MICE / 인센티브</option>
+                <option>출장시스템 연동</option>
+                <option>기타</option>
+              </select>
+              <input type="text" placeholder="예상 일정 (선택)" />
+            </div>
+
+            <label>
+              <textarea name="tx-questions" rows="4" placeholder="문의 내용을 입력해주세요 *" required></textarea>
+            </label>
+
+            <label class="consent">
+              <input type="checkbox" required style="width: unset;" />
+              개인정보 수집 및 이용에 동의합니다. (필수)
+            </label>
+
+            <button type="submit">견적 문의하기</button>
+          </form>
+
+          <footer class="inquiry-footer">
+            <div class="footer-container">
+
+              <div class="footer-brand">
+                <span class="brand-text">조이스투어(JOICETOUR) | </span>
+                <span class="logo-crop">
+                  <img src="./image/조이스투어 로고(투명).png" alt="Joice Tour" />
+                </span>
+              </div>
+
+              <div class="footer-info">
+                <p>조이스투어 | 주소 : 서울 서대문구 수색로 100 상가 102동 105호(후면)</p>
+                <p>
+                  대표이사 : 조태홍 |
+                  사업자등록번호 : 667-28-01524 |
+                  대표번호 : 02-303-0108
+                </p>
+                <p style="padding-top: 10px; font-size: 11px;">
+                  Copyright © 2026 JOICETOUR INC.
+                  All rights Reserved.
+                </p>
+                <p class="footer-note">
+                  본 사이트의 일부 이미지는 생성형 AI 기술을 활용하여 제작되었습니다.
+                </p>
+              </div>
+
+            </div>
+          </footer>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <div class="indicator">
+    <div class="dot active" data-index="0"></div>
+    <div class="dot" data-index="1"></div>
+    <div class="dot" data-index="2"></div>
+  </div>
+
+  <script>
+    gsap.registerPlugin(Observer);
+
+    const container = document.querySelector(".container");
+    const sections = gsap.utils.toArray(".container > section");
+    const dots = document.querySelectorAll(".dot");
+    const navLinks = document.querySelectorAll("nav a");
+
+    let currentIndex = 0;
+    let isAnimating = false;
+    let unlockTimer = null;
+
+    const lastIndex = sections.length - 1;
+    const ANIMATION_DURATION = 0.8;
+    const LOCK_DELAY = 950;
+
+    function updateUI(index) {
+      dots.forEach(dot => dot.classList.remove("active"));
+      if (dots[index]) dots[index].classList.add("active");
+    }
+
+    function getSectionY(index = currentIndex) {
+      return -(sections[index]?.offsetTop || 0);
+    }
+
+    function clearUnlockTimer() {
+      if (unlockTimer) {
+        clearTimeout(unlockTimer);
+        unlockTimer = null;
+      }
+    }
+
+    function unlockScroll() {
+      isAnimating = false;
+      clearUnlockTimer();
+    }
+
+    function lockScroll() {
+      isAnimating = true;
+      clearUnlockTimer();
+      unlockTimer = setTimeout(() => {
+        isAnimating = false;
+        unlockTimer = null;
+      }, LOCK_DELAY);
+    }
+
+    function snapToCurrent(duration = 0.35) {
+      gsap.killTweensOf(container);
+      gsap.to(container, {
+        y: getSectionY(),
+        duration,
+        ease: "power2.out",
+        overwrite: "auto"
+      });
+    }
+
+    function goToSection(index) {
+      const nextIndex = gsap.utils.clamp(0, lastIndex, index);
+
+      if (nextIndex === currentIndex) {
+        snapToCurrent();
+        return;
+      }
+
+      if (isAnimating) return;
+
+      lockScroll();
+      currentIndex = nextIndex;
+      updateUI(currentIndex);
+
+      gsap.killTweensOf(container);
+      gsap.to(container, {
+        y: getSectionY(),
+        duration: ANIMATION_DURATION,
+        ease: "power3.out",
+        overwrite: "auto",
+        onComplete: unlockScroll,
+        onInterrupt: unlockScroll
+      });
+    }
+
+    function goNext() {
+      if (currentIndex < lastIndex) {
+        goToSection(currentIndex + 1);
+      } else {
+        snapToCurrent();
+      }
+    }
+
+    function goPrev() {
+      if (currentIndex > 0) {
+        goToSection(currentIndex - 1);
+      } else {
+        snapToCurrent();
+      }
+    }
+
+    gsap.set(container, { y: 0 });
+    updateUI(currentIndex);
+
+    Observer.create({
+      target: window,
+      type: "wheel",
+      preventDefault: true,
+      tolerance: 16,
+      wheelSpeed: 1,
+      onDown: () => {
+        if (isAnimating) return;
+        goNext();
+      },
+      onUp: () => {
+        if (isAnimating) return;
+        goPrev();
+      }
+    });
+
+    Observer.create({
+      target: window,
+      type: "touch",
+      preventDefault: true,
+      lockAxis: true,
+      dragMinimum: 10,
+      tolerance: 18,
+      ignore: ".inquiry-form, .inquiry-form *, .joice-cards, .joice-cards *, .service-cards, .service-cards *, input, textarea, select, option, button, label, a",
+      onDragEnd(self) {
+        if (isAnimating) return;
+
+        const deltaY = self.startY - self.y;
+
+        if (Math.abs(deltaY) < 45) {
+          snapToCurrent(0.2);
+          return;
+        }
+
+        if (deltaY > 0) {
+          goNext();
+        } else {
+          goPrev();
+        }
+      }
+    });
+
+    dots.forEach(dot => {
+      dot.addEventListener("click", () => {
+        goToSection(Number(dot.dataset.index));
+      });
+    });
+
+    navLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        goToSection(Number(link.dataset.index));
+      });
+    });
+
+    window.addEventListener("resize", () => {
+      gsap.set(container, { y: getSectionY() });
+    });
+  </script>
+
+</body>
+
+</html>
