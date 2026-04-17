@@ -13,7 +13,7 @@ body{
     width: 80%;
     max-width: 1080px;
     margin: 0 auto;
-    text-align: center;
+    /* text-align: center; - 애니메이션 효과 내려고 */
     background-image: url('../image/css/ball-1906468_640\ 1.png');
     background-repeat: repeat-x;
     /*X축은 가로 가로가로의 반복 금지  */
@@ -23,12 +23,18 @@ body{
     line-height: 40px;
     font-size: 35px;
     color: #fff;
+    /* animation: move 10S forwards; */
+    /* forward, 한번만 끝남 - fill mode  */
+    /* 한번만 반복되는데 썰매가 끝가지 갔다가 다시 천천히 앞으로오게 해보세요 */
+    animation: move 10s forwards linear;
 }
 
 
 /* header 영역 */
 .hdr-wrap{
     background-color: #A31F30;
+    animation: ani 1s 3;
+    /* 애니메이션넣기 */
 }
 .hdr-wrap>header{
     width: 80%;
@@ -234,14 +240,30 @@ section article>.image{
 }
 .cnt2>section>article>.image{
     width: 50%;
-    background-image: url(../image/css/컨텐츠2.png);
+    background-image: url(../image/css/hans-pink-324175.jpg);
     height: 440px;
 }
     .cnt2>section>article>.image>video{
         height: 100%;
         object-fit: cover;
+        /* transition: display 0.5s; */
+        opacity: 1;
+        transition: opacity 0.5s;
 
     }
+
+     .cnt2>section>article>.image>input{
+        display: none;
+        
+     }
+
+      .cnt2>section>article>.image>input:checked+video{
+         /* display: inline;
+         block */
+         /* display: none; */
+         opacity: 0;
+         /* opacity 투명도 */
+      }
 
 .cnt2>section>article>.texts{
     width: 50%;
@@ -268,11 +290,12 @@ section article>.image{
     border-radius: 20px;
     cursor: pointer;
     /* 클릭할 수 있게끔 만드는거 커서 모양 바뀜 */
+   
 }
 
 
 .cnt2>section>article>.texts>button:hover{
-    background-color: #A31F30;
+    animation: butt 1s infinite;
 }
 /* 버튼 근처가면 색깔이 바뀔 수 있도록 */
 
@@ -401,6 +424,79 @@ section article>.image{
     } */
 
 
+
+/* 애니메이션 추가 */
+
+    @keyframes ani {
+        0%{
+            /* 0%시전에일 떄 적용될 CSS */
+            background-color: #f3ff12;
+         
+        }
+
+        50%{
+        /* 50%시전에일 떄 적용될 CSS */
+            background-color: #00ffc3;
+        }
+
+        100%{
+        /* 100%시전에일 떄 적용될 CSS */
+            background-color: #ff00b3;
+        }
+
+        100%{
+        /* 100%시전에일 떄 적용될 CSS */
+            background-color: #A31F30;
+        }
+ 
+        /* 1차 선언하기 */
+    }
+
+
+    @keyframes butt {
+        0%{
+            /* 0%시전에일 떄 적용될 CSS */
+            background-color: #f3ff12;
+         
+        }
+
+        50%{
+        /* 50%시전에일 떄 적용될 CSS */
+            background-color: #00ffc3;
+        }
+
+        100%{
+        /* 100%시전에일 떄 적용될 CSS */
+            background-color: #ff00b3;
+        }
+
+        100%{
+        /* 100%시전에일 떄 적용될 CSS */
+            background-color: #A31F30;
+        }
+
+    }
+
+
+     @keyframes move {
+        0%{
+            /* 0%시전에일 떄 적용될 CSS */
+            margin-left: 0%;
+        }
+
+        50%{
+            margin-left: calc(100%-44.75px);
+        }
+
+        100%{
+        /* 100%시전에일 떄 적용될 CSS */
+            margin-left: 0%;
+        }
+
+    }
+
+
+
     /* 반응형 페이지 */
 
 
@@ -409,6 +505,8 @@ section article>.image{
         display: none;
     }
 }
+
+
 
 @media screen and (max-width: 1024px) {
     /* 이 안에 값들이 가로사이즈 1024px 이하일 때 적용 */
@@ -589,6 +687,7 @@ section article>.image{
     }
 
 
+    
 
 
 
