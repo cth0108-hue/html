@@ -14,8 +14,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/all.min.css">
-    <link rel="stylesheet" href="./reset.css">
+  <link rel="stylesheet" href="./css/all.min.css">
+  <link rel="stylesheet" href="./reset.css">
   <title>조이스투어</title>
 
   <!-- ========================================
@@ -45,55 +45,56 @@
     }
 
     /* ========================================
-   HEADER LAYOUT
-   - 로고 자리와 메뉴 자리를 분리
-   - 로고 폭이 커지면 자리도 같이 커지도록 수정
-   ======================================== */
-  .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 80px;
-    padding: 0 40px;
-    display: grid;
-    grid-template-columns: max-content 1fr;
-    align-items: center;
-    z-index: 1000;
-    background: transparent;
-    overflow: visible;
-  }
+       HEADER LAYOUT
+       - 로고 영역 + 메뉴 영역 분리
+       ======================================== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      align-items: center;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.02);
+      backdrop-filter: blur(2px);
+      overflow: visible;
+    }
 
-/* ========================================
-   LOGO AREA
-   - 로고가 들어가는 자리 자체를 콘텐츠 폭만큼 확보
-   ======================================== */
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  width: max-content;
-  min-width: max-content;
-  flex-shrink: 0;
-  overflow: visible;
-}
+    /* ========================================
+       LOGO AREA
+       - 로고 크기만큼 자리 확보
+       ======================================== */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: max-content;
+      min-width: max-content;
+      flex-shrink: 0;
+      overflow: visible;
+      position: relative;
+      z-index: 1003;
+    }
 
-/* ========================================
-   LOGO IMAGE
-   - 이미지 크기 확대
-   - 비율 유지
-   ======================================== */
-.logo img {
-  display: block;
-  height: 80px;
-  width: auto;
-  max-width: none;
-  object-fit: contain;
-  flex-shrink: 0;
-  background-image: url(./image/조이스투어\ 로고\(투명\).png);
-}
+    /* ========================================
+       LOGO IMAGE
+       - 로고 확대 / 비율 유지
+       ======================================== */
+    .logo img {
+      display: block;
+      height: 80px;
+      width: auto;
+      max-width: none;
+      object-fit: contain;
+      flex-shrink: 0;
+      background-image: url(./image/조이스투어\ 로고\(투명\).png);
+    }
 
-  .logo-text {
+    .logo-text {
       font-size: 15px;
       letter-spacing: 0.5px;
       color: #677AAB;
@@ -101,34 +102,156 @@
       white-space: nowrap;
     }
 
-/* ========================================
-   HEADER NAV
-   - 메뉴는 오른쪽 끝으로 정렬
-   ======================================== */
-.header nav {
-  justify-self: end;
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  min-width: 0;
-}
+    /* ========================================
+       HEADER NAV
+       - 큰 화면 기본 메뉴
+       ======================================== */
+    .desktop-nav {
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      min-width: 0;
+    }
 
-/* ========================================
-   HEADER NAV LINK
-   ======================================== */
-.header nav a {
-  margin-left: 0;
-  color: #677AAB;
-  text-decoration: none;
-  font-weight: 500;
-  cursor: pointer;
-  white-space: nowrap;
-}
+    .desktop-nav a {
+      margin-left: 0;
+      color: #677AAB;
+      text-decoration: none;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.2s ease;
+    }
 
+    .desktop-nav a:hover {
+      opacity: 0.8;
+    }
+
+    /* ========================================
+       HAMBURGER BUTTON
+       - 모바일 전용 버튼
+       ======================================== */
+    .menu-toggle {
+      display: none;
+      justify-self: end;
+      width: 44px;
+      height: 44px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      position: relative;
+      z-index: 1004;
+      padding: 0;
+    }
+
+    .menu-toggle span {
+      position: absolute;
+      left: 10px;
+      width: 24px;
+      height: 2px;
+      background: #677AAB;
+      border-radius: 999px;
+      transition: transform 0.25s ease, opacity 0.25s ease, top 0.25s ease;
+    }
+
+    .menu-toggle span:nth-child(1) {
+      top: 14px;
+    }
+
+    .menu-toggle span:nth-child(2) {
+      top: 21px;
+    }
+
+    .menu-toggle span:nth-child(3) {
+      top: 28px;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      top: 21px;
+      transform: rotate(45deg);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      top: 21px;
+      transform: rotate(-45deg);
+    }
+
+    /* ========================================
+       MOBILE MENU
+       - 모바일 햄버거 열렸을 때 표시되는 드롭다운
+       ======================================== */
+    .mobile-menu {
+      position: fixed;
+      top: 64px;
+      left: 0;
+      right: 0;
+      background: rgba(15, 23, 42, 0.98);
+      backdrop-filter: blur(12px);
+      z-index: 1002;
+      padding: 10px 16px 18px;
+      transform: translateY(-12px);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+    }
+
+    .mobile-menu nav {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .mobile-menu a {
+      display: block;
+      width: 100%;
+      padding: 14px 12px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.06);
+      cursor: pointer;
+    }
+
+    .mobile-menu-backdrop {
+      position: fixed;
+      inset: 64px 0 0 0;
+      background: rgba(0, 0, 0, 0.35);
+      z-index: 1001;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+
+    body.menu-open .mobile-menu {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    body.menu-open .mobile-menu-backdrop {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    body.menu-open {
+      overflow: hidden !important;
+    }
 
     /* ========================================
        VIEWPORT / CONTAINER
-       - 원페이지 슬라이드 전체 영역
+       - PC 원페이지 슬라이드 기준 영역
        ======================================== */
     .viewport {
       height: 100vh;
@@ -152,11 +275,10 @@
 
     /* ========================================
        SECTION 1 : HERO
-       - 메인 비주얼 / 배경 전환
+       - 메인 비주얼 / 배경 영상
        ======================================== */
     .joice-hero {
       height: 60vh;
-      /* background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3') no-repeat center / cover; */
       display: flex;
       align-items: center;
       padding-left: 60px;
@@ -166,39 +288,33 @@
     }
 
     /* ========================================
-   HERO VIDEO
-   - joice-hero 배경 영상
-   ======================================== */
-.hero-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
-}
+       HERO VIDEO
+       - 배경 영상
+       ======================================== */
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
 
-/* ========================================
-   HERO OVERLAY
-   - 영상 위 어두운 오버레이
-   ======================================== */
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.28);
-  z-index: 1;
-}
+    /* ========================================
+       HERO OVERLAY
+       - 영상 위 어두운 레이어
+       ======================================== */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.28);
+      z-index: 1;
+    }
 
-/* ========================================
-   HERO CONTENT
-   - 텍스트가 영상 위로 오도록 조정
-   ======================================== */
-.hero-content {
-  position: relative;
-  z-index: 2;
-}
-
-
+    /* ========================================
+       HERO CONTENT
+       - 텍스트가 영상 위로 올라오게 설정
+       ======================================== */
     .hero-content {
       position: relative;
       z-index: 2;
@@ -235,7 +351,7 @@
 
     /* ========================================
        SECTION 1 : CARDS
-       - 메인 하단 카드
+       - 메인 하단 카드 영역
        ======================================== */
     .joice-cards {
       display: flex;
@@ -245,7 +361,6 @@
       position: relative;
       z-index: 2;
       padding: 0 20px;
-      
     }
 
     .card {
@@ -282,7 +397,7 @@
 
     /* ========================================
        SECTION 2 / 3 BASE
-       - 기본 배경
+       - 기본 배경용 클래스
        ======================================== */
     .page2 {
       background: #3498db;
@@ -388,17 +503,6 @@
       color: rgba(255, 255, 255, 0.8);
     }
 
-    @media (max-width: 900px) {
-      .service-cards {
-        grid-template-columns: 1fr;
-      }
-
-      .service-title {
-        font-size: 32px;
-        margin-bottom: 40px;
-      }
-    }
-
     /* ========================================
        SECTION 3 : INQUIRY
        - 문의 폼 / 하단 정보
@@ -446,14 +550,6 @@
       -webkit-overflow-scrolling: touch;
       overscroll-behavior: contain;
       touch-action: pan-y;
-    }
-
-    @media (min-width: 1024px) {
-      .inquiry-form {
-        min-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-      }
     }
 
     .form-row {
@@ -558,23 +654,243 @@
     }
 
     /* ========================================
+       NATURAL SCROLL MODE
+       - 모바일 + 작은 창 PC + 낮은 높이 화면 공통
+       ======================================== */
+    body.natural-scroll-mode {
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    body.natural-scroll-mode .viewport {
+      height: auto;
+      min-height: 100vh;
+      overflow: visible;
+    }
+
+    body.natural-scroll-mode .container {
+      height: auto;
+      transform: none !important;
+      will-change: auto;
+    }
+
+    body.natural-scroll-mode section {
+      height: auto;
+      min-height: 100vh;
+    }
+
+    body.natural-scroll-mode .page1 {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    body.natural-scroll-mode .page2.service-section {
+      height: auto !important;
+      min-height: 100vh !important;
+      align-items: flex-start;
+    }
+
+    body.natural-scroll-mode .page3.inquiry-section {
+      height: auto !important;
+      min-height: 100vh !important;
+    }
+
+    body.natural-scroll-mode .inquiry-wrapper {
+      height: auto;
+    }
+
+    body.natural-scroll-mode .inquiry-form {
+      overflow: visible;
+    }
+
+    /* ========================================
+       COMPACT DESKTOP
+       - 작은 PC 창 / 낮은 높이 브라우저 창
+       - 헤더 축소 버전 포함
+       ======================================== */
+    @media (min-width: 769px) and (max-width: 1280px),
+      (min-width: 769px) and (max-height: 860px) {
+
+      .header {
+        height: 72px;
+        padding: 0 24px;
+      }
+
+      .logo {
+        gap: 10px;
+      }
+
+      .logo img {
+        height: 70px;
+      }
+
+      .logo-text {
+        font-size: 13px;
+      }
+
+      .desktop-nav {
+        gap: 16px;
+      }
+
+      .desktop-nav a {
+        font-size: 14px;
+      }
+
+      section {
+        padding-top: 72px;
+      }
+
+      body.natural-scroll-mode section {
+        padding-top: 72px;
+        scroll-margin-top: 72px;
+      }
+
+      body.natural-scroll-mode .joice-hero {
+        height: 52vh;
+        min-height: 360px;
+        padding: 0 24px;
+      }
+
+      body.natural-scroll-mode .hero-content {
+        padding-left: 0;
+        padding-right: 0;
+        max-width: 760px;
+      }
+
+      body.natural-scroll-mode .hero-content h1 {
+        font-size: clamp(34px, 4vw, 46px);
+        margin-bottom: 16px;
+      }
+
+      body.natural-scroll-mode .hero-content p {
+        font-size: 15px;
+        line-height: 1.6;
+        margin-bottom: 16px;
+      }
+
+      body.natural-scroll-mode .joice-cards {
+        justify-content: flex-start;
+        gap: 16px;
+        padding: 0 24px 24px;
+        transform: translateY(-48px);
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x proximity;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      body.natural-scroll-mode .joice-cards::-webkit-scrollbar {
+        display: none;
+      }
+
+      body.natural-scroll-mode .card {
+        min-width: 280px;
+        width: min(320px, calc((100vw - 88px) / 2));
+        padding: 18px;
+        scroll-snap-align: start;
+      }
+
+      body.natural-scroll-mode .card img {
+        height: 160px;
+      }
+
+      body.natural-scroll-mode .service-inner {
+        padding: 32px 24px 28px;
+      }
+
+      body.natural-scroll-mode .service-title {
+        font-size: clamp(28px, 3.4vw, 38px);
+        line-height: 1.3;
+        margin-bottom: 28px;
+      }
+
+      body.natural-scroll-mode .service-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+      }
+
+      body.natural-scroll-mode .service-card {
+        padding: 28px 22px;
+      }
+
+      body.natural-scroll-mode .service-icon {
+        font-size: 30px;
+        margin-bottom: 14px;
+      }
+
+      body.natural-scroll-mode .service-card h3 {
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
+
+      body.natural-scroll-mode .service-card p {
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      body.natural-scroll-mode .inquiry-section {
+        padding-top: 100px;
+      }
+
+      body.natural-scroll-mode .inquiry-wrapper {
+        min-height: calc(100vh - 100px);
+        padding: 0 24px 24px;
+      }
+
+      body.natural-scroll-mode .inquiry-form {
+        min-width: 0 !important;
+        max-width: none;
+      }
+
+      body.natural-scroll-mode .footer-container {
+        padding: 0 24px;
+      }
+    }
+
+    /* ========================================
+       더 작은 PC 창 보정
+       - 서비스 카드 1열 전환
+       ======================================== */
+    @media (min-width: 769px) and (max-width: 980px),
+      (min-width: 769px) and (max-height: 720px) {
+      body.natural-scroll-mode .service-cards {
+        grid-template-columns: 1fr;
+      }
+
+      body.natural-scroll-mode .card {
+        min-width: 300px;
+        width: min(340px, 72vw);
+      }
+    }
+
+    /* ========================================
        MOBILE RESPONSIVE
-       - 모바일 레이아웃 보정
-       - 섹션2 하단 과다 여백 축소
+       - 모바일에서는 일반 세로 스크롤
+       - 상단 메뉴는 햄버거 메뉴로 전환
        ======================================== */
     @media (max-width: 768px) {
+
       html,
       body {
-        overflow: hidden;
+        height: auto;
+        min-height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-y;
       }
 
       .header {
         height: 64px;
         padding: 0 16px;
+        grid-template-columns: 1fr auto;
       }
 
       .logo {
         gap: 8px;
+        min-width: 0;
       }
 
       .logo img {
@@ -588,29 +904,43 @@
         word-break: keep-all;
       }
 
-      .header nav {
-        gap: 10px;
+      .desktop-nav {
+        display: none;
       }
 
-      .header nav a {
-        margin-left: 0;
-        font-size: 12px;
+      .menu-toggle {
+        display: block;
+      }
+
+      .mobile-menu {
+        top: 64px;
+      }
+
+      .mobile-menu-backdrop {
+        inset: 64px 0 0 0;
       }
 
       .viewport {
-        height: 100dvh;
+        height: auto;
+        min-height: 100dvh;
+        overflow: visible;
       }
 
       .container {
         height: auto;
+        transform: none !important;
+        will-change: auto;
       }
 
       section {
+        height: auto;
+        min-height: 100dvh;
         padding-top: 64px;
+        scroll-margin-top: 64px;
       }
 
       .page1 {
-        height: 100dvh;
+        min-height: 100dvh;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -648,6 +978,11 @@
         padding: 12px 16px;
       }
 
+      /* ========================================
+         모바일 카드 영역
+         - 세로 스크롤은 살리고
+         - 카드 영역만 가로 스와이프 가능
+         ======================================== */
       .joice-cards {
         justify-content: flex-start;
         gap: 12px;
@@ -687,18 +1022,15 @@
       }
 
       .indicator {
-        right: 10px;
-        gap: 10px;
+        display: none;
       }
 
-      .dot {
-        width: 10px;
-        height: 10px;
-      }
-
+      /* ========================================
+         모바일 서비스 섹션
+         ======================================== */
       .page2.service-section {
         height: auto !important;
-        min-height: 0 !important;
+        min-height: 100dvh !important;
         padding-top: 64px;
         padding-bottom: 20px;
         align-items: flex-start;
@@ -744,8 +1076,12 @@
         line-height: 1.55;
       }
 
+      /* ========================================
+         모바일 문의 섹션
+         ======================================== */
       .page3.inquiry-section {
-        height: 100dvh;
+        height: auto !important;
+        min-height: 100dvh !important;
       }
 
       .inquiry-section {
@@ -753,7 +1089,8 @@
       }
 
       .inquiry-wrapper {
-        height: calc(100dvh - 84px);
+        height: auto;
+        min-height: calc(100dvh - 84px);
         padding: 0 16px;
       }
 
@@ -777,6 +1114,7 @@
         max-width: none;
         padding: 16px;
         border-radius: 12px;
+        overflow: visible;
       }
 
       .form-row {
@@ -844,14 +1182,6 @@
         display: none;
       }
 
-      .header nav {
-        gap: 8px;
-      }
-
-      .header nav a {
-        font-size: 11px;
-      }
-
       .hero-content h1 {
         font-size: 24px;
       }
@@ -864,10 +1194,6 @@
         min-width: 86vw;
         max-width: 86vw;
       }
-
-      .indicator {
-        display: none;
-      }
     }
   </style>
 </head>
@@ -876,7 +1202,8 @@
 
   <!-- ========================================
        HEADER AREA
-       - 상단 로고 / 메뉴
+       - 큰 화면: 일반 메뉴
+       - 모바일: 햄버거 버튼 표시
        ======================================== -->
   <header class="header">
     <div class="logo">
@@ -884,41 +1211,57 @@
       <span class="logo-text">여행의 좋은선택 조이스투어</span>
     </div>
 
+    <nav class="desktop-nav">
+      <a data-index="0">회사소개</a>
+      <a data-index="1">서비스</a>
+      <a data-index="2">견적문의</a>
+    </nav>
+
+    <button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <!-- ========================================
+       MOBILE MENU
+       - 모바일 전용 드롭다운 메뉴
+       ======================================== -->
+  <div class="mobile-menu">
     <nav>
       <a data-index="0">회사소개</a>
       <a data-index="1">서비스</a>
       <a data-index="2">견적문의</a>
     </nav>
-  </header>
+  </div>
+  <div class="mobile-menu-backdrop"></div>
 
   <!-- ========================================
        VIEWPORT AREA
-       - 슬라이드 섹션 전체 감싸는 영역
+       - 큰 PC : 원페이지 슬라이드
+       - 모바일 / 작은창 PC : 일반 문서 흐름
        ======================================== -->
   <div class="viewport">
     <div class="container">
 
       <!-- ========================================
            SECTION 1 : COMPANY INTRO
+           - 회사 소개 + 메인 카드
            ======================================== -->
       <section class="page1">
-        <!-- ========================================
-     HERO VIDEO AREA
-     - 메인 배경을 이미지 대신 영상으로 사용
-     ======================================== -->
-<div class="joice-hero">
+        <div class="joice-hero">
 
           <!-- 배경 비디오 -->
-            <video class="hero-video" autoplay muted loop playsinline>
+          <video class="hero-video" autoplay muted loop playsinline>
             <source src="./image/공항대기 메인1.mp4" type="video/mp4" />
-            </video>
+          </video>
 
-          <!-- 영상 위 어둡게 덮는 레이어 -->
-            <div class="hero-overlay"></div>
-
+          <!-- 영상 위 어두운 레이어 -->
+          <div class="hero-overlay"></div>
 
           <!-- 메인 텍스트 -->
-            <div class="hero-content">
+          <div class="hero-content">
             <h1>조이스투어(JOICETOUR)</h1>
             <p>
               조이스투어는 기업 고객을 위한 전문 여행/행사 기획을 진행하는 여행사입니다.<br />
@@ -953,6 +1296,7 @@
 
       <!-- ========================================
            SECTION 2 : SERVICE
+           - 서비스 소개 카드
            ======================================== -->
       <section class="page2 service-section">
         <div class="service-inner">
@@ -1020,6 +1364,7 @@
 
       <!-- ========================================
            SECTION 3 : INQUIRY
+           - 견적문의 폼 + 푸터
            ======================================== -->
       <section class="page3 inquiry-section">
         <div class="inquiry-wrapper">
@@ -1102,7 +1447,7 @@
 
   <!-- ========================================
        RIGHT INDICATOR
-       - 우측 점 네비게이션
+       - 큰 PC 화면용 우측 점 네비게이션
        ======================================== -->
   <div class="indicator">
     <div class="dot active" data-index="0"></div>
@@ -1116,22 +1461,84 @@
        ======================================== */
     gsap.registerPlugin(Observer);
 
+    /* ========================================
+       공통 요소 선택
+       ======================================== */
     const container = document.querySelector(".container");
     const sections = gsap.utils.toArray(".container > section");
     const dots = document.querySelectorAll(".dot");
-    const navLinks = document.querySelectorAll("nav a");
+    const desktopNavLinks = document.querySelectorAll(".desktop-nav a");
+    const mobileNavLinks = document.querySelectorAll(".mobile-menu a");
+    const menuToggle = document.querySelector(".menu-toggle");
+    const mobileMenuBackdrop = document.querySelector(".mobile-menu-backdrop");
 
+    /* ========================================
+       화면 모드 기준
+       - mobileQuery : 모바일
+       - compactDesktopQuery : 작은 창 PC / 낮은 높이 화면
+       ======================================== */
+    const mobileQuery = window.matchMedia("(max-width: 768px)");
+    const compactDesktopQuery = window.matchMedia(
+      "(min-width: 769px) and (max-width: 1280px), (min-width: 769px) and (max-height: 860px)"
+    );
+
+    /* ========================================
+       상태값
+       ======================================== */
     let currentIndex = 0;
     let isAnimating = false;
     let unlockTimer = null;
+    let wheelObserver = null;
+    let touchObserver = null;
+    let currentMode = null;
 
     const lastIndex = sections.length - 1;
     const ANIMATION_DURATION = 0.8;
     const LOCK_DELAY = 950;
 
     /* ========================================
-       COMMON UTIL
-       - 인디케이터 상태 반영
+       현재 모드 판별
+       - natural : 일반 세로 스크롤
+       - snap    : 데스크톱 원페이지 스냅
+       ======================================== */
+    function isMobile() {
+      return mobileQuery.matches;
+    }
+
+    function isCompactDesktop() {
+      return compactDesktopQuery.matches;
+    }
+
+    function isNaturalScrollMode() {
+      return isMobile() || isCompactDesktop();
+    }
+
+    /* ========================================
+       모바일 메뉴 제어
+       ======================================== */
+    function openMenu() {
+      if (!isMobile()) return;
+      document.body.classList.add("menu-open");
+      menuToggle.classList.add("active");
+      menuToggle.setAttribute("aria-expanded", "true");
+    }
+
+    function closeMenu() {
+      document.body.classList.remove("menu-open");
+      menuToggle.classList.remove("active");
+      menuToggle.setAttribute("aria-expanded", "false");
+    }
+
+    function toggleMenu() {
+      if (document.body.classList.contains("menu-open")) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    }
+
+    /* ========================================
+       인디케이터 UI 갱신
        ======================================== */
     function updateUI(index) {
       dots.forEach(dot => dot.classList.remove("active"));
@@ -1139,17 +1546,14 @@
     }
 
     /* ========================================
-       POSITION CALC
-       - 각 섹션의 실제 위치값 사용
-       - 모바일에서 section 높이가 달라도 정확히 이동
+       데스크톱 스냅용 Y 위치 계산
        ======================================== */
     function getSectionY(index = currentIndex) {
       return -(sections[index]?.offsetTop || 0);
     }
 
     /* ========================================
-       SCROLL LOCK CONTROL
-       - 애니메이션 중 중복 입력 방지
+       애니메이션 잠금 제어
        ======================================== */
     function clearUnlockTimer() {
       if (unlockTimer) {
@@ -1173,10 +1577,27 @@
     }
 
     /* ========================================
-       SNAP TO CURRENT SECTION
-       - 현재 섹션 위치로 보정
+       Observer 제거
+       ======================================== */
+    function killObservers() {
+      if (wheelObserver) {
+        wheelObserver.kill();
+        wheelObserver = null;
+      }
+
+      if (touchObserver) {
+        touchObserver.kill();
+        touchObserver = null;
+      }
+    }
+
+    /* ========================================
+       현재 섹션으로 위치 보정
+       - snap 모드에서만 사용
        ======================================== */
     function snapToCurrent(duration = 0.35) {
+      if (isNaturalScrollMode()) return;
+
       gsap.killTweensOf(container);
       gsap.to(container, {
         y: getSectionY(),
@@ -1187,11 +1608,23 @@
     }
 
     /* ========================================
-       MOVE TO SECTION
-       - 지정 섹션으로 이동
+       섹션 이동
+       - natural mode : scrollIntoView
+       - snap mode    : gsap translate
        ======================================== */
     function goToSection(index) {
       const nextIndex = gsap.utils.clamp(0, lastIndex, index);
+
+      if (isNaturalScrollMode()) {
+        currentIndex = nextIndex;
+        updateUI(currentIndex);
+
+        sections[nextIndex]?.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+        return;
+      }
 
       if (nextIndex === currentIndex) {
         snapToCurrent();
@@ -1218,7 +1651,7 @@
     function goNext() {
       if (currentIndex < lastIndex) {
         goToSection(currentIndex + 1);
-      } else {
+      } else if (!isNaturalScrollMode()) {
         snapToCurrent();
       }
     }
@@ -1226,93 +1659,179 @@
     function goPrev() {
       if (currentIndex > 0) {
         goToSection(currentIndex - 1);
-      } else {
+      } else if (!isNaturalScrollMode()) {
         snapToCurrent();
       }
     }
 
     /* ========================================
-       INITIAL STATE
+       데스크톱 스냅용 Observer 생성
+       - 큰 화면에서만 활성화
        ======================================== */
-    gsap.set(container, { y: 0 });
-    updateUI(currentIndex);
+    function createDesktopObservers() {
+      killObservers();
 
-    /* ========================================
-       DESKTOP WHEEL CONTROL
-       - 마우스 휠 이동
-       ======================================== */
-    Observer.create({
-      target: window,
-      type: "wheel",
-      preventDefault: true,
-      tolerance: 16,
-      wheelSpeed: 1,
-      onDown: () => {
-        if (isAnimating) return;
-        goNext();
-      },
-      onUp: () => {
-        if (isAnimating) return;
-        goPrev();
-      }
-    });
-
-    /* ========================================
-       MOBILE TOUCH CONTROL
-       - 스와이프 방향에 따라 섹션 이동
-       - 내부 폼 / 카드 스크롤 영역은 제외
-       ======================================== */
-    Observer.create({
-      target: window,
-      type: "touch",
-      preventDefault: true,
-      lockAxis: true,
-      dragMinimum: 10,
-      tolerance: 18,
-      ignore: ".inquiry-form, .inquiry-form *, .joice-cards, .joice-cards *, .service-cards, .service-cards *, input, textarea, select, option, button, label, a",
-      onDragEnd(self) {
-        if (isAnimating) return;
-
-        const deltaY = self.startY - self.y;
-
-        if (Math.abs(deltaY) < 45) {
-          snapToCurrent(0.2);
-          return;
-        }
-
-        if (deltaY > 0) {
+      wheelObserver = Observer.create({
+        target: window,
+        type: "wheel",
+        preventDefault: true,
+        tolerance: 16,
+        wheelSpeed: 1,
+        onDown: () => {
+          if (isAnimating) return;
           goNext();
-        } else {
+        },
+        onUp: () => {
+          if (isAnimating) return;
           goPrev();
         }
-      }
-    });
+      });
+
+      touchObserver = Observer.create({
+        target: window,
+        type: "touch",
+        preventDefault: true,
+        lockAxis: true,
+        dragMinimum: 10,
+        tolerance: 18,
+        ignore: ".inquiry-form, .inquiry-form *, .joice-cards, .joice-cards *, .service-cards, .service-cards *, input, textarea, select, option, button, label, a",
+        onDragEnd(self) {
+          if (isAnimating) return;
+
+          const deltaY = self.startY - self.y;
+
+          if (Math.abs(deltaY) < 45) {
+            snapToCurrent(0.2);
+            return;
+          }
+
+          if (deltaY > 0) {
+            goNext();
+          } else {
+            goPrev();
+          }
+        }
+      });
+    }
 
     /* ========================================
-       DOT / NAV CLICK EVENT
-       - 상단 메뉴 / 우측 점 클릭 이동
+       일반 스크롤 모드에서 현재 섹션 계산
        ======================================== */
+    function syncCurrentSectionFromScroll() {
+      if (!isNaturalScrollMode()) return;
+
+      const offset = isMobile() ? 90 : 120;
+      let visibleIndex = 0;
+
+      sections.forEach((section, idx) => {
+        if (window.scrollY + offset >= section.offsetTop) {
+          visibleIndex = idx;
+        }
+      });
+
+      if (visibleIndex !== currentIndex) {
+        currentIndex = visibleIndex;
+        updateUI(currentIndex);
+      }
+    }
+
+    /* ========================================
+       모드 적용
+       - natural mode : 모바일 + 작은창 PC
+       - snap mode    : 큰 화면 PC
+       ======================================== */
+    function applyMode() {
+      const newMode = isNaturalScrollMode() ? "natural" : "snap";
+
+      closeMenu();
+
+      if (newMode === "natural") {
+        document.body.classList.add("natural-scroll-mode");
+        killObservers();
+        clearUnlockTimer();
+        isAnimating = false;
+
+        gsap.killTweensOf(container);
+        gsap.set(container, { clearProps: "transform" });
+
+        if (currentMode !== "natural") {
+          requestAnimationFrame(() => {
+            window.scrollTo(0, sections[currentIndex]?.offsetTop || 0);
+            syncCurrentSectionFromScroll();
+            updateUI(currentIndex);
+          });
+        } else {
+          syncCurrentSectionFromScroll();
+          updateUI(currentIndex);
+        }
+
+        currentMode = "natural";
+        return;
+      }
+
+      let desktopIndex = currentIndex;
+
+      if (window.scrollY > 0) {
+        sections.forEach((section, idx) => {
+          if (window.scrollY + 120 >= section.offsetTop) {
+            desktopIndex = idx;
+          }
+        });
+      }
+
+      currentIndex = desktopIndex;
+      document.body.classList.remove("natural-scroll-mode");
+      window.scrollTo(0, 0);
+
+      gsap.killTweensOf(container);
+      gsap.set(container, { y: getSectionY(currentIndex) });
+
+      updateUI(currentIndex);
+      createDesktopObservers();
+      currentMode = "snap";
+    }
+
+    /* ========================================
+       이벤트 바인딩
+       ======================================== */
+    menuToggle.addEventListener("click", toggleMenu);
+    mobileMenuBackdrop.addEventListener("click", closeMenu);
+
     dots.forEach(dot => {
       dot.addEventListener("click", () => {
         goToSection(Number(dot.dataset.index));
       });
     });
 
-    navLinks.forEach(link => {
+    desktopNavLinks.forEach(link => {
       link.addEventListener("click", () => {
         goToSection(Number(link.dataset.index));
       });
     });
 
-    /* ========================================
-       RESIZE EVENT
-       - 화면 크기 변경 시 현재 위치 재보정
-       ======================================== */
-    window.addEventListener("resize", () => {
-      gsap.set(container, { y: getSectionY() });
+    mobileNavLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        const targetIndex = Number(link.dataset.index);
+        closeMenu();
+        requestAnimationFrame(() => {
+          goToSection(targetIndex);
+        });
+      });
     });
 
+    window.addEventListener("scroll", syncCurrentSectionFromScroll, { passive: true });
+    window.addEventListener("resize", applyMode);
 
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeMenu();
+      }
+    });
+
+    /* ========================================
+       최초 실행
+       ======================================== */
+    applyMode();
   </script>
 
 </body>
